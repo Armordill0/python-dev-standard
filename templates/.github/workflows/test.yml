@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Read Python version from config/core/library_info.json
+      - name: Read requested Python version from config/core/library_info.json
         id: pyver
         run: |
           if [ -f config/core/library_info.json ]; then
@@ -23,11 +23,24 @@ jobs:
           fi
           echo "version=$VER" >> "$GITHUB_OUTPUT"
 
-      - name: Set up Python
+      - name: Set up requested Python version
+        id: setup_requested
+        continue-on-error: true
         uses: actions/setup-python@v5
         with:
           python-version: ${{ steps.pyver.outputs.version }}
           allow-prereleases: true
+
+      - name: Fallback to latest stable Python if requested version is unavailable
+        if: steps.setup_requested.outcome == 'failure'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Emit warning on Python version fallback
+        if: steps.setup_requested.outcome == 'failure'
+        run: |
+          echo "::warning title=Python Version Fallback::Requested Python ${{ steps.pyver.outputs.version }} from config/core/library_info.json is not available on this GitHub runner. Falling back to stable Python $(python --version)."
 
       - name: Install Python dependencies
         run: |
