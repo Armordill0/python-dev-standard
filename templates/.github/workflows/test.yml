@@ -13,17 +13,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Read Python version from config/core/library_info.json
+        id: pyver
+        run: |
+          if [ -f config/core/library_info.json ]; then
+            VER=$(python3 -c "import json; print(json.load(open('config/core/library_info.json')).get('python_version', '3.13'))")
+          else
+            VER="3.13"
+          fi
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: ${{ steps.pyver.outputs.version }}
+          allow-prereleases: true
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install pytest
+          if [ -f config/core/requirements.lock ]; then python -m pip install -r config/core/requirements.lock; fi
           if [ -f config/requirements.txt ]; then python -m pip install -r config/requirements.txt; fi
-          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
 
       - name: Run pytest
         env:
@@ -32,7 +43,7 @@ jobs:
 
   test-node:
     runs-on: ubuntu-latest
-    if: hashFiles('package.json', 'src/user/web/package.json') != ''
+    if: hashFiles('src/user/web/package.json') != ''
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -42,14 +53,9 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install and run Node tests (root or src/user/web)
+      - name: Install and run Node tests (src/user/web)
         env:
           CI: "true"
         run: |
-          if [ -f package.json ]; then
-            npm ci
-            npm test
-          elif [ -f src/user/web/package.json ]; then
-            npm --prefix src/user/web ci
-            npm --prefix src/user/web test
-          fi
+          npm --prefix src/user/web ci
+          npm --prefix src/user/web test
