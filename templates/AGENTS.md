@@ -15,6 +15,10 @@
    - Keep the repository root strictly aligned with the 4-folder skeleton (`config/`, `docs/`, `tests/`, `src/`).
    - Place tool business logic ONLY inside `src/user/` (put web frontends in `src/user/web/`) and between `# ここからメイン処理` and `# ここまでメイン処理` in `src/main.py`.
 6. **Dependency Direction**: `src/main.py` -> `src/user/` -> `src/core/` only. Read `docs/for_ai/` per-script specs before opening full `.py` or `.ts` source files.
+7. **Mandatory Project Documentation (`docs/for_ai/project/PROJECT_STATUS.md`)**:
+   - Maintain 8 required sections: (1) What We Want to Do, (2) Current State Analysis, (3) Problem / Objective Definition, (4) Targets & Rationale, (5) Approach & Rationale, (6) Schedule, (7) Current Progress, (8) Next Actions.
+   - Store concept notes in `docs/for_ai/project/concept/` and references in `docs/for_ai/project/references/` (link heavy files from Google Drive).
+   - When asked about project status/goals/progress in Japanese, read `PROJECT_STATUS.md` and answer concisely in Japanese.
 
 ## 2. CI / Automated Testing Rules (GitHub Actions First)
 1. **Headless & Cloud Execution Prerequisite (Cross-OS Compatibility)**:
