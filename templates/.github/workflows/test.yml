@@ -1,0 +1,55 @@
+name: Automated Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+          if [ -f config/requirements.txt ]; then python -m pip install -r config/requirements.txt; fi
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+
+      - name: Run pytest
+        env:
+          PYTHONPATH: src
+        run: pytest
+
+  test-node:
+    runs-on: ubuntu-latest
+    if: hashFiles('package.json', 'src/user/web/package.json') != ''
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install and run Node tests (root or src/user/web)
+        env:
+          CI: "true"
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm test
+          elif [ -f src/user/web/package.json ]; then
+            npm --prefix src/user/web ci
+            npm --prefix src/user/web test
+          fi

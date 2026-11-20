@@ -1,5 +1,6 @@
 # ==============================================================================
 # Python Library Requirements (Pinned Versions)
-# Auto-installed into .embeddablepython by setup_script.py when SHA-256 changes.
+# Auto-installed into .embeddablepython locally and via pip install in GitHub Actions.
 # Format: package_name==x.y.z
 # ==============================================================================
+pytest==8.3.4
