@@ -1,0 +1,9 @@
+# .clinerules — Cline Entry Point
+
+1. Before planning or modifying any code, read and strictly follow `AGENTS.md` at the repository root.
+2. Follow the low-token reading order:
+   - `docs/for_ai/project/PROJECT_STATUS.md` (Project context & progress)
+   - `docs/for_ai/<folder>/<script>.md` (Per-script interface spec)
+   - `tests/README.md` (Test catalog, smoke/full commands, and expected outputs)
+   - Target `.py` source file (Open only when modifying implementation)
+3. After edits, verify behavior by running the smoke test command in `tests/README.md`.

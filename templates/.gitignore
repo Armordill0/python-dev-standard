@@ -1,0 +1,25 @@
+# Embedded Python runtime
+.embeddablepython/
+
+# Runtime output & secrets
+data/
+!data/.gitkeep
+!data/log/.gitkeep
+!data/temp/.gitkeep
+!data/save/.gitkeep
+config/app_setting.json
+!config/app_setting.sample.json
+config/secrets.toml
+secrets.toml
+*.pem
+*.key
+
+# Caches & temporary folders
+.agents/
+temp-*.html
+__pycache__/
+*.py[cod]
+.pytest_cache/
+node_modules/
+dist/
+*.log

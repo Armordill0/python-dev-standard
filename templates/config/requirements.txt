@@ -1,0 +1,5 @@
+# ==============================================================================
+# Python Library Requirements (Pinned Versions)
+# Auto-installed into .embeddablepython by setup_script.py when SHA-256 changes.
+# Format: package_name==x.y.z
+# ==============================================================================

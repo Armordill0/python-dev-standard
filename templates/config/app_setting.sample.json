@@ -1,0 +1,23 @@
+{
+    "tool_identity": {
+        "tool_code": "SAMPLE_TOOL",
+        "tool_name": "Sample Tool",
+        "tool_version": "1.0.0"
+    },
+    "governance_configuration": {
+        "auth_required": false,
+        "min_supported_version": "1.0.0",
+        "mock_domain_db": {
+            "target_db_host": "localhost",
+            "target_db_port": 5432,
+            "target_db_name": "sample_db"
+        }
+    },
+    "telemetry_configuration": {
+        "detail_sheet_url": ""
+    },
+    "update_configuration": {
+        "update_source_prod": ""
+    },
+    "pylib": []
+}
