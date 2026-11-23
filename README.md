@@ -12,6 +12,7 @@
 - **依存関係の自動同期（`config/requirements.txt`）**：ライブラリ実体は Git に入れず、バージョン固定（`pkg==x.y.z`）で管理。
 
 ## 含まれるファイル
+- **[COMPANY_PYTHON_ENV_GUIDE.md](./COMPANY_PYTHON_ENV_GUIDE.md)**：**1ファイル完結版**。最新の統一構成（`Scripts/`, `Tests/`, `Data/`, `Settings/`, `docs/`）・条件付き目次型 `AGENTS.md`・メモリ効率/信頼性・結合テスト基準・ヘッドレスCIをすべて1枚に凝縮した導入ガイド。
 - **[PROMPT_FOR_COMPANY_AI.md](./PROMPT_FOR_COMPANY_AI.md)**：VSCode の AI 拡張（Kilo Code / Claude Code / Cline）のチャット欄にそのまま貼り付けて既存環境を自動整備するプロンプト。
 - **[templates/](./templates/)**：そのままプロジェクトへコピーして使える各種ひな型ファイル一式。
   - `AGENTS.md`（Python 環境標準ルール）
