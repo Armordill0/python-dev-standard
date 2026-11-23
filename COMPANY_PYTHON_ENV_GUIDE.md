@@ -28,7 +28,7 @@
 │   ├── log/.gitkeep
 │   ├── save/.gitkeep
 │   └── temp/.gitkeep
-├── docs/
+├── Docs/
 │   ├── README.md                    # 全ドキュメント目次
 │   ├── for_ai/                      # AI向け（英語・低トークン）
 │   │   ├── README.md
@@ -65,18 +65,18 @@
 > **Progressive Disclosure Rule**: Do NOT read all documentation upfront. Read ONLY the specific file listed below for your current task.
 
 ## 1. Core Invariants
-- **Language & Git**: Chat in natural Japanese; code, commits, `AGENTS.md`, `docs/for_ai/**`, and `Tests/README.md` in English; `docs/for_developers/**` in Japanese. Run `git pull` before editing. Use topic branches (`feat/*`, `fix/*`) + Pull Request instead of direct push to `main`. Never commit secrets.
-- **Clean Root**: Keep root strictly aligned to `Settings/`, `Data/`, `docs/`, `Tests/`, and `Scripts/` (plus `.github/`, `.vscode/`, `.gitignore`, `.gitattributes`, `AGENTS.md`, `pytest.ini`, bridge files). Place web/extra files under `Scripts/User/web/` or `Settings/`.
+- **Language & Git**: Chat in natural Japanese; code, commits, `AGENTS.md`, `Docs/for_ai/**`, and `Tests/README.md` in English; `Docs/for_developers/**` in Japanese. Run `git pull` before editing. Use topic branches (`feat/*`, `fix/*`) + Pull Request instead of direct push to `main`. Never commit secrets.
+- **Clean Root**: Keep root strictly aligned to `Settings/`, `Data/`, `Docs/`, `Tests/`, and `Scripts/` (plus `.github/`, `.vscode/`, `.gitignore`, `.gitattributes`, `AGENTS.md`, `pytest.ini`, bridge files). Place web/extra files under `Scripts/User/web/` or `Settings/`.
 - **Code & Dependency Boundary**: Place shared logic in `Scripts/Core/` and tool-specific logic ONLY in `Scripts/User/` (`Common/` + per-feature subfolders) and `Scripts/main.py`. Dependency direction: `Scripts/main.py` -> `Scripts/User/` -> `Scripts/Core/` only.
 - **Runtime & Dependencies**: Declare all pip packages (including `pytest`) with pinned versions in `Settings/requirements.txt` (never at repo root). Always pass `--show_error_dialog false` in CLI/CI runs.
 
 ## 2. On-Demand Task Routing Table
 | Current Task | Files to Read On-Demand |
 | :--- | :--- |
-| **1. Understand goals, architecture, or progress** | `docs/for_ai/project/PROJECT_STATUS.md` (and `docs/README.md` for index) |
-| **2. Inspect or modify code (`Scripts/`)** | Target spec `docs/for_ai/{core,user}/<script>.md` FIRST, then `docs/for_ai/rules/coding_rules.md`, then target `.py`/`.ts` |
+| **1. Understand goals, architecture, or progress** | `Docs/for_ai/project/PROJECT_STATUS.md` (and `Docs/README.md` for index) |
+| **2. Inspect or modify code (`Scripts/`)** | Target spec `Docs/for_ai/{core,user}/<script>.md` FIRST, then `Docs/for_ai/rules/coding_rules.md`, then target `.py`/`.ts` |
 | **3. Run, add, or fix tests / CI** | `Tests/README.md` and `.github/workflows/test.yml` |
-| **4. Setup environment, dependencies, or release** | `docs/for_ai/SETUP.md` |
+| **4. Setup environment, dependencies, or release** | `Docs/for_ai/SETUP.md` |
 ```
 
 ### VSCode 各AI拡張の橋渡しファイル（ルール本文は重複させない）
@@ -102,7 +102,7 @@ Read and follow `@AGENTS.md` as the single canonical router. Do NOT read all doc
 
 ## 3. 下層ルール・ドキュメントひな型
 
-### `docs/for_ai/rules/coding_rules.md`（規約・メモリ効率・信頼性）
+### `Docs/for_ai/rules/coding_rules.md`（規約・メモリ効率・信頼性）
 ```markdown
 # Coding, Reliability & Architecture Rules (Python)
 
@@ -111,7 +111,7 @@ Read and follow `@AGENTS.md` as the single canonical router. Do NOT read all doc
 | :--- | :--- |
 | Dependency Direction | `Scripts/main.py` -> `Scripts/User/` -> `Scripts/Core/` only |
 | Class Layout | 1 Feature = 1 File = 1 Main Class (`Scripts/User/`) |
-| Per-Script Spec (`docs/for_ai/`) | 1-to-1 `.md` spec per script: 1. What It Does, 2. How to Use, 3. Dependencies & Config Keys, 4. Associated Tests, 5. Notes |
+| Per-Script Spec (`Docs/for_ai/`) | 1-to-1 `.md` spec per script: 1. What It Does, 2. How to Use, 3. Dependencies & Config Keys, 4. Associated Tests, 5. Notes |
 | Comments & Docstrings | English only; NO half-width parentheses `()` (use `（）` or `［］`) |
 | Semver Rule | `x.y.z`: initial `1.0.0`, feature `y+1, z=0`, fix/comment `z+1` |
 
@@ -123,10 +123,10 @@ Read and follow `@AGENTS.md` as the single canonical router. Do NOT read all doc
 | **Timeouts & Retries** | Every external network/IPC call (HTTP, DB, SMTP, SSH, subprocess) MUST specify an explicit `timeout` (e.g., `timeout=10`). Use bounded retries for transient errors. |
 | **Atomic File Writes** | Write state/config/save files to a temporary file in the same directory and commit via `os.replace()` to prevent corrupted/zero-byte files on crash. |
 | **Cross-OS Compatibility** | Use `pathlib.Path` for all paths (no hardcoded `C:\` or `\`). Mock Windows-only APIs in tests or mark with `@pytest.mark.skipif(sys.platform != "win32", reason="Windows only")`. |
-| **Project Docs & Conflict Prevention** | Maintain 8-section `docs/for_ai/project/PROJECT_STATUS.md` at milestone/PR boundaries to minimize merge conflicts. Enforce LF/CRLF via `.gitattributes`. |
+| **Project Docs & Conflict Prevention** | Maintain 8-section `Docs/for_ai/project/PROJECT_STATUS.md` at milestone/PR boundaries to minimize merge conflicts. Enforce LF/CRLF via `.gitattributes`. |
 ```
 
-### `docs/for_ai/project/PROJECT_STATUS.md`（必須8項目）
+### `Docs/for_ai/project/PROJECT_STATUS.md`（必須8項目）
 ```markdown
 # Project Status
 
