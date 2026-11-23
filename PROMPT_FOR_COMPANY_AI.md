@@ -13,18 +13,18 @@
   2. Cline用：`.clinerules`
   3. Kilo Code用：`.kilocode/rules/guidelines.md`
 
-### 2. 4大フォルダ構成の整備とルート直下の整理（`config/`・`docs/`・`tests/`・`src/`）
-- **ルート直下のルール**：リポジトリのルート直下には原則としてコア骨格（`config/`, `docs/`, `tests/`, `src/`, `.github/`, `.gitignore`, `AGENTS.md`, `pytest.ini`, 起動バッチ等）のみを置く。ツール固有のWebフロントエンド（`vite.config.ts`, `package.json`, `templates/` 等）・デプロイ設定（`Dockerfile` 等）・補助スクリプト群がルート直下にある場合は、それぞれ `src/user/web/`, `src/user/scripts/`, `config/deploy/` 等へ振り分けてルートを綺麗に保つ。
+### 2. 4大フォルダ構成の整備とルート直下の整理（`config/`・`Docs/`・`tests/`・`src/`）
+- **ルート直下のルール**：リポジトリのルート直下には原則としてコア骨格（`config/`, `Docs/`, `tests/`, `src/`, `.github/`, `.gitignore`, `AGENTS.md`, `pytest.ini`, 起動バッチ等）のみを置く。ツール固有のWebフロントエンド（`vite.config.ts`, `package.json`, `templates/` 等）・デプロイ設定（`Dockerfile` 等）・補助スクリプト群がルート直下にある場合は、それぞれ `src/user/web/`, `src/user/scripts/`, `config/deploy/` 等へ振り分けてルートを綺麗に保つ。
 - `config/`
   - 設定ファイル（JSON：`app_setting.sample.json` と Git除外の `app_setting.json`）
   - `config/requirements.txt`：必要なpipライブラリ（`pytest` を含む）をバージョン固定（`pkg==x.y.z`）で漏れなく記述する（ライブラリ実体はGitに入れない）。
-- `docs/`
-  - `docs/README.md`：全ドキュメントへの目次
-  - `docs/for_ai/project/PROJECT_STATUS.md`：必須の開発資料（英語で記載し、以下の8項目を見出しとして必ず含める）
+- `Docs/`
+  - `Docs/README.md`：全ドキュメントへの目次
+  - `Docs/for_ai/project/PROJECT_STATUS.md`：必須の開発資料（英語で記載し、以下の8項目を見出しとして必ず含める）
     1. What We Want to Do / 2. Current State Analysis / 3. Problem / Objective Definition / 4. Targets & Rationale / 5. Approach & Rationale / 6. Schedule / 7. Current Progress / 8. Next Actions
-  - `docs/for_ai/project/concept/`（構想資料）、`docs/for_ai/project/references/`（参考文献・外部仕様）
-  - `docs/for_ai/`（AI向け英語仕様書。スクリプトと1対1で `<script_name>.md` を作成し、「1. What It Does / 2. How to Use / 3. Dependencies & Config Keys / 4. Associated Tests / 5. Notes & Constraints」を記載。AIはソースを開く前に必ずこれを読む）
-  - `docs/for_developers/`（開発者向け日本語解説）
+  - `Docs/for_ai/project/concept/`（構想資料）、`Docs/for_ai/project/references/`（参考文献・外部仕様）
+  - `Docs/for_ai/`（AI向け英語仕様書。スクリプトと1対1で `<script_name>.md` を作成し、「1. What It Does / 2. How to Use / 3. Dependencies & Config Keys / 4. Associated Tests / 5. Notes & Constraints」を記載。AIはソースを開く前に必ずこれを読む）
+  - `Docs/for_developers/`（開発者向け日本語解説）
 - `src/`
   - `src/main.py`（エントリポイント）、`src/core/`（共通部品）、`src/user/`（ツール固有処理。Webや補助スクリプトは `src/user/web/` 等に格納）
   - 依存の向きは `src/main.py` -> `src/user/` -> `src/core/` の単方向のみとする。
@@ -44,6 +44,6 @@
 
 ### 作業手順
 1. 現在のフォルダ構成と `AGENTS.md` を確認し、上記との差分をリストアップする。
-2. 不足しているフォルダ・ひな型ファイル（橋渡しファイル3種、`docs/README.md`、`docs/for_ai/project/PROJECT_STATUS.md`、`tests/README.md`、`config/requirements.txt`、`pytest.ini`、`.github/workflows/test.yml`）を作成し、`AGENTS.md` に上記ルールを統合する。
+2. 不足しているフォルダ・ひな型ファイル（橋渡しファイル3種、`Docs/README.md`、`Docs/for_ai/project/PROJECT_STATUS.md`、`tests/README.md`、`config/requirements.txt`、`pytest.ini`、`.github/workflows/test.yml`）を作成し、`AGENTS.md` に上記ルールを統合する。
 3. 完了後、作成・更新したファイル一覧を日本語で報告する。
 ````

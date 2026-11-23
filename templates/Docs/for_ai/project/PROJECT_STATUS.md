@@ -31,4 +31,4 @@
 - [ ] Feature implementation
 
 ## 8. Next Actions
-1. Define domain modules under `src/user/` and their specs under `docs/for_ai/user/`.
+1. Define domain modules under `src/user/` and their specs under `Docs/for_ai/user/`.

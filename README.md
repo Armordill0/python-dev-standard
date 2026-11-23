@@ -4,21 +4,21 @@
 
 ## 特徴
 - **ルールの正本一本化（`AGENTS.md`）**：Claude Code / Cline / Kilo Code / Antigravity がすべて同じ `AGENTS.md` を参照する橋渡しファイルを用意。
-- **ルート直下を 4 フォルダに厳守**：`config/`・`docs/`・`tests/`・`src/` のみをルート直下に置き、Webフロントエンドやデプロイ設定などは `src/user/web/` や `config/deploy/` に格納。
+- **ルート直下を 4 フォルダに厳守**：`config/`・`Docs/`・`tests/`・`src/` のみをルート直下に置き、Webフロントエンドやデプロイ設定などは `src/user/web/` や `config/deploy/` に格納。
 - **低トークン設計（AI向け資料とテスト一覧）**：
-  - `docs/for_ai/`（英語）：スクリプトごとのインターフェース仕様書と `project/PROJECT_STATUS.md`（必須8項目）を集約。AIはソースを開く前に仕様書を読む。
-  - `docs/for_developers/`（日本語）：人間向けの解説やマニュアルを配置。
+  - `Docs/for_ai/`（英語）：スクリプトごとのインターフェース仕様書と `project/PROJECT_STATUS.md`（必須8項目）を集約。AIはソースを開く前に仕様書を読む。
+  - `Docs/for_developers/`（日本語）：人間向けの解説やマニュアルを配置。
   - `tests/README.md`：テストファイル名は `test_<対象>.py` とシンプルに保ち、テスト条件・`smoke`/`full` コマンド・期待結果を一覧表に集約。
 - **依存関係の自動同期（`config/requirements.txt`）**：ライブラリ実体は Git に入れず、バージョン固定（`pkg==x.y.z`）で管理。
 
 ## 含まれるファイル
-- **[COMPANY_PYTHON_ENV_GUIDE.md](./COMPANY_PYTHON_ENV_GUIDE.md)**：**1ファイル完結版**。最新の統一構成（`Scripts/`, `Tests/`, `Data/`, `Settings/`, `docs/`）・条件付き目次型 `AGENTS.md`・メモリ効率/信頼性・結合テスト基準・ヘッドレスCIをすべて1枚に凝縮した導入ガイド。
+- **[COMPANY_PYTHON_ENV_GUIDE.md](./COMPANY_PYTHON_ENV_GUIDE.md)**：**1ファイル完結版**。最新の統一構成（`Scripts/`, `Tests/`, `Data/`, `Settings/`, `Docs/`）・条件付き目次型 `AGENTS.md`・メモリ効率/信頼性・結合テスト基準・ヘッドレスCIをすべて1枚に凝縮した導入ガイド。
 - **[PROMPT_FOR_COMPANY_AI.md](./PROMPT_FOR_COMPANY_AI.md)**：VSCode の AI 拡張（Kilo Code / Claude Code / Cline）のチャット欄にそのまま貼り付けて既存環境を自動整備するプロンプト。
 - **[templates/](./templates/)**：そのままプロジェクトへコピーして使える各種ひな型ファイル一式。
   - `AGENTS.md`（Python 環境標準ルール）
   - `CLAUDE.md` / `.clinerules` / `.kilocode/rules/guidelines.md`（各AI拡張の橋渡し）
   - `config/requirements.txt` / `config/app_setting.sample.json`
-  - `docs/README.md` / `docs/for_ai/README.md` / `docs/for_ai/project/PROJECT_STATUS.md`
+  - `Docs/README.md` / `Docs/for_ai/README.md` / `Docs/for_ai/project/PROJECT_STATUS.md`
   - `tests/README.md`
   - `.gitignore`
 
